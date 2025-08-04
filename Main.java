@@ -103,7 +103,7 @@ public class Main {
     public static int findSmalestNumber(int[] numbers) {
         int min = Integer.MAX_VALUE;
         int idx = 0;
-        return recursiveFindMin(min, idx, numbers);
+        return recurciveFindMin(min, idx, numbers);
     }
 
 
