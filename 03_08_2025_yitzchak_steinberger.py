@@ -172,11 +172,53 @@ class Item:
 
 
 # ********** Q4 **********
-def q4():
-    # your code
+def q4(paintings):
+    result = recursive_helper(paintings, 80000, 0, 0, [])
+    Q4A = len(result[1])
+    Q4B = result[0]
+    Q4C = result[2]
+
+    print(f"Q4A = {Q4A}")
+    print(f"Q4B = {Q4B}")
+    print(f"Q4C = {Q4C}")
     pass
+
+
 
 
 """
 Helper functions for question 4 will be written here.
 """
+
+def recursive_helper(paintings, remainig_budget, people, i, chosen_paintings):
+    if i >= len(paintings):
+        return people, chosen_paintings, remainig_budget
+
+    taken = (0, [])
+    if paintings[i][1] <= remainig_budget:
+        copy_chosen = chosen_paintings.copy()
+        copy_chosen.append(paintings[i])
+        taken = recursive_helper(
+            paintings,
+            remainig_budget - paintings[i][1],
+            people + paintings[i][2],
+            i + 1,
+            copy_chosen, 
+        )
+
+    not_taken = recursive_helper(
+        paintings,
+        remainig_budget,
+        people,
+        i + 1,
+        chosen_paintings
+    )
+
+    if taken[0] > not_taken[0]:
+        return taken
+    else:
+        return not_taken
+
+
+
+
